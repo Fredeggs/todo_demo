@@ -12,6 +12,12 @@ toolbar = DebugToolbarExtension(app)
 connect_db(app)
 
 
+@app.route("/")
+def index_page():
+    todos = Todo.query.all()
+    return render_template("index.html", todos=todos)
+
+
 @app.route("/api/todos")
 def list_todos():
     all_todos = [todo.serialize() for todo in Todo.query.all()]
